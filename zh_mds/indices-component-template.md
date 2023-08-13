@@ -1,0 +1,327 @@
+
+
+[Elastic Docs](/guide/) ›[Elasticsearch Guide [8.9]](index.md) ›[REST
+APIs](rest-apis.md) ›[Index APIs](indices.md)
+
+[« Create or update alias API](indices-add-alias.md) [Create or update index
+template API »](indices-put-template.md)
+
+## 创建或更新组件模板API
+
+创建或更新组件模板。组件模板是用于构造指定索引映射、设置和别名的索引模板的构建基块。
+
+    
+    
+    response = client.cluster.put_component_template(
+      name: 'template_1',
+      body: {
+        template: {
+          settings: {
+            number_of_shards: 1
+          },
+          mappings: {
+            _source: {
+              enabled: false
+            },
+            properties: {
+              host_name: {
+                type: 'keyword'
+              },
+              created_at: {
+                type: 'date',
+                format: 'EEE MMM dd HH:mm:ss Z yyyy'
+              }
+            }
+          }
+        }
+      }
+    )
+    puts response
+    
+    
+    PUT _component_template/template_1
+    {
+      "template": {
+        "settings": {
+          "number_of_shards": 1
+        },
+        "mappings": {
+          "_source": {
+            "enabled": false
+          },
+          "properties": {
+            "host_name": {
+              "type": "keyword"
+            },
+            "created_at": {
+              "type": "date",
+              "format": "EEE MMM dd HH:mm:ss Z yyyy"
+            }
+          }
+        }
+      }
+    }
+
+###Request
+
+"放/_component_template/<component-template>"
+
+###Prerequisites
+
+* 如果启用了 Elasticsearch 安全功能，您必须具有"manage_index_templates"或"管理"集群权限才能使用此 API。
+
+###Description
+
+索引模板可以由多个组件模板组成。要使用组件模板，请在索引模板的"composed_of"列表中指定它。组件模板仅作为匹配索引模板的一部分应用于新的数据流和索引。
+
+直接在索引模板或 createindex 请求中指定的设置和映射将覆盖组件模板中指定的任何设置或映射。
+
+组件模板仅在索引创建期间使用。对于数据流，这包括数据流创建和流的支持索引的创建。对组件模板的更改不会影响现有索引，包括流的支持索引。
+
+#### 组件模板中的注释
+
+您可以在组件模板中使用 C 样式 /* */ 阻止注释。您可以在请求正文中的任何位置包含注释，但左大括号之前除外。
+
+### 路径参数
+
+`<component-template>`
+
+    
+
+(必需，字符串)要创建的组件模板的名称。
+
+Elasticsearch 包括以下内置组件模板：
+
+* "日志映射" * "日志设置" * "指标映射" * "指标设置" * "合成映射" * "合成设置"
+
+弹性代理使用这些模板为其数据流配置后备索引。如果您使用 Elastic 代理并希望覆盖其中一个模板，请将替换模板的"版本"设置为高于当前版本。
+
+如果您不使用弹性代理，并且想要禁用所有内置组件和索引模板，请使用集群更新设置 API 将"stack.templates.enabled"设置为"false"。
+
+### 查询参数
+
+`create`
+
+     (Optional, Boolean) If `true`, this request cannot replace or update existing component templates. Defaults to `false`. 
+`master_timeout`
+
+     (Optional, [time units](api-conventions.html#time-units "Time units")) Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Defaults to `30s`. 
+
+### 请求正文
+
+`template`
+
+    
+
+(必填，对象)这是要应用的模板，可以选择包括"映射"、"设置"或"别名"配置。
+
+"模板"的属性
+
+`aliases`
+
+    
+
+(可选，对象的对象)要添加的别名。
+
+如果索引模板包含"data_stream"对象，则这些是数据流别名。否则，这些是索引别名。数据流别名会忽略"index_routing"、"路由"和"search_routing"选项。
+
+"别名"对象的属性
+
+`<alias>`
+
+    
+
+(必填，对象)键是别名。索引别名支持日期数学。
+
+对象正文包含别名的选项。支持空对象。
+
+""的属性<alias>
+
+`filter`
+
+     (Optional, [Query DSL object](query-dsl.html "Query DSL")) Query used to limit documents the alias can access. 
+`index_routing`
+
+     (Optional, string) Value used to route indexing operations to a specific shard. If specified, this overwrites the `routing` value for indexing operations. 
+`is_hidden`
+
+     (Optional, Boolean) If `true`, the alias is [hidden](api-conventions.html#multi-hidden "Hidden data streams and indices"). Defaults to `false`. All indices for the alias must have the same `is_hidden` value. 
+`is_write_index`
+
+     (Optional, Boolean) If `true`, the index is the [write index](aliases.html#write-index "Write index") for the alias. Defaults to `false`. 
+`routing`
+
+     (Optional, string) Value used to route indexing and search operations to a specific shard. 
+`search_routing`
+
+     (Optional, string) Value used to route search operations to a specific shard. If specified, this overwrites the `routing` value for search operations. 
+
+`mappings`
+
+    
+
+(可选，映射对象)索引中字段的映射。如果指定，此映射可以包括：
+
+* 字段名称 * 字段数据类型 * 映射参数
+
+请参阅映射。
+
+`settings`
+
+     (Optional, [index setting object](index-modules.html#index-modules-settings "Index Settings")) Configuration options for the index. See [Index Settings](index-modules.html#index-modules-settings "Index Settings"). 
+
+`version`
+
+     (Optional, integer) Version number used to manage component templates externally. This number is not automatically generated or incremented by Elasticsearch. 
+`allow_auto_create`
+
+     (Optional, Boolean) This setting overrides the value of the [`action.auto_create_index`](docs-index_.html#index-creation "Automatically create data streams and indices") cluster setting. If set to `true` in a template, then indices can be automatically created using that template even if auto-creation of indices is disabled via `actions.auto_create_index`. If set to `false`, then indices or data streams matching the template must always be explicitly created, and may never be automatically created. 
+`_meta`
+
+     (Optional, object) Optional user metadata about the component template. May have any contents. This map is not automatically generated by Elasticsearch. 
+
+###Examples
+
+#### 具有索引别名的组件模板
+
+可以在组件模板中包含索引别名。
+
+    
+    
+    response = client.cluster.put_component_template(
+      name: 'template_1',
+      body: {
+        template: {
+          settings: {
+            number_of_shards: 1
+          },
+          aliases: {
+            "alias1": {},
+            "alias2": {
+              filter: {
+                term: {
+                  "user.id": 'kimchy'
+                }
+              },
+              routing: 'shard-1'
+            },
+            "{index}-alias": {}
+          }
+        }
+      }
+    )
+    puts response
+    
+    
+    PUT _component_template/template_1
+    {
+      "template": {
+        "settings" : {
+            "number_of_shards" : 1
+        },
+        "aliases" : {
+            "alias1" : {},
+            "alias2" : {
+                "filter" : {
+                    "term" : {"user.id" : "kimchy" }
+                },
+                "routing" : "shard-1"
+            },
+            "{index}-alias" : {} __}
+      }
+    }
+
+__
+
+|
+
+在索引创建期间，别名中的"{index}"占位符将替换为应用模板的实际索引名称。   ---|--- #### 应用组件模板编辑
+
+不能将组件模板直接应用于数据流或索引。要应用，组件模板必须包含在索引模板的"composed_of"列表中。请参阅索引模板。
+
+#### 组件模板版本控制
+
+您可以使用"版本"参数将版本号添加到组件模板。外部系统可以使用这些版本号来简化模板管理。
+
+"version"参数是可选的，不会由Elasticsearch自动生成或使用。
+
+要取消设置"版本"，请替换模板而不指定版本。
+
+    
+    
+    response = client.cluster.put_component_template(
+      name: 'template_1',
+      body: {
+        template: {
+          settings: {
+            number_of_shards: 1
+          }
+        },
+        version: 123
+      }
+    )
+    puts response
+    
+    
+    PUT /_component_template/template_1
+    {
+      "template": {
+        "settings" : {
+            "number_of_shards" : 1
+        }
+      },
+      "version": 123
+    }
+
+要检查"版本"，您可以使用获取组件模板 API。
+
+#### 组件模板元数据
+
+您可以使用"_meta"参数将任意元数据添加到组件模板。此用户定义的对象存储在群集状态中，因此最好保持简短。
+
+"_meta"参数是可选的，不会由Elasticsearch自动生成或使用。
+
+要取消设置"_meta"，请替换模板而不指定模板。
+
+    
+    
+    response = client.cluster.put_component_template(
+      name: 'template_1',
+      body: {
+        template: {
+          settings: {
+            number_of_shards: 1
+          }
+        },
+        _meta: {
+          description: 'set number of shards to one',
+          serialization: {
+            class: 'MyComponentTemplate',
+            id: 10
+          }
+        }
+      }
+    )
+    puts response
+    
+    
+    PUT /_component_template/template_1
+    {
+      "template": {
+        "settings" : {
+            "number_of_shards" : 1
+        }
+      },
+      "_meta": {
+        "description": "set number of shards to one",
+        "serialization": {
+          "class": "MyComponentTemplate",
+          "id": 10
+        }
+      }
+    }
+
+要检查"_meta"，您可以使用获取组件模板 API。
+
+[« Create or update alias API](indices-add-alias.md) [Create or update index
+template API »](indices-put-template.md)
