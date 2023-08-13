@@ -77,7 +77,7 @@ def translate2zh_md(contents):
 
 
 if __name__ == "__main__":
-    path = os.path.abspath(r"./zh_mds")
+    path = os.path.abspath(r"./zh_mdss")
     if not os.path.exists(path):
         os.mkdir(path)
 

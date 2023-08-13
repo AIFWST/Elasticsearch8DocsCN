@@ -2763,6 +2763,3 @@
 [Elasticsearch version 8.0.0-alpha1](./release-notes-8.0.0-alpha1.md)
 
 [Dependencies and versions](./dependencies-versions.md)
-
-[What is Elasticsearch?](./elasticsearch-intro.md)
-
