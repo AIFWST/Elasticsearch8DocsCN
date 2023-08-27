@@ -10,7 +10,17 @@ settings.md)
 
 Elasticsearch 只需要很少的配置即可开始，但在使用集群生产之前，必须考虑的项目数量：
 
-* 路径设置 * 群集名称设置 * 节点名称设置 * 网络主机设置 * 发现设置 * 堆大小设置 * JVM 堆转储路径设置 * GC 日志记录设置 * 临时目录设置 * JVM 致命错误日志设置 * 群集备份
+* 路径设置
+* 群集名称设置
+* 节点名称设置
+* 网络主机设置 
+* 发现设置
+* 堆大小设置 
+* JVM 堆转储路径设置 
+* GC 日志记录设置
+* 临时目录设置
+* JVM 致命错误日志设置 
+* 群集备份
 
 我们的 Elastic 云服务会自动配置这些项目，默认情况下使您的集群可用于生产。
 
@@ -35,9 +45,7 @@ Linux 和 macOS 安装支持 Unix 样式的路径：
       logs: /var/log/elasticsearch
 
 Windows 安装支持带有转义反斜杠的 DOS 路径：
-
-    
-    
+   
     path:
       data: "C:\\Elastic\\Elasticsearch\\data"
       logs: "C:\\Elastic\\Elasticsearch\\logs"

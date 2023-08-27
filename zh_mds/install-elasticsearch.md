@@ -18,43 +18,35 @@ Elastic Cloud 提供 Elasticsearch、Kibana 和 Elastic 的可观测性、企业
 
 如果你想自己安装和管理 Elasticsearch，你可以：
 
-* 在任何 Linux、MacOS 或 Windows 机器上运行 Elasticsearch。  * 在 Docker 容器中运行 Elasticsearch。  * 使用 Kubernetes 上的 Elastic Cloud 在 Kubernetes 上设置和管理 Elasticsearch、Kibana、Elastic Agent 和 Elastic Stack 的其余部分。
+* 在任何 Linux、MacOS 或 Windows 机器上运行 Elasticsearch。  
+* 在 Docker 容器中运行 Elasticsearch。  
+* 使用 Kubernetes 上的 Elastic Cloud 在 Kubernetes 上设置和管理 Elasticsearch、Kibana、Elastic Agent 和 Elastic Stack 的其余部分。
 
-要在您自己的机器上试用 Elasticsearch，我们建议使用 Docker 并同时运行 Elasticsearch 和 Kibana。有关更多信息，请参阅 RunElasticsearch 本地。
+要在您自己的机器上试用 Elasticsearch，我们建议使用 Docker 并同时运行 Elasticsearch 和 Kibana。
 
-### Elasticsearch installpackages
+### Elasticsearch install packages
 
 Elasticsearch 以以下包格式提供：
 
 Linux 和 MacOS "tar.gz"存档
 
-|
-
-"tar.gz"存档可用于安装在任何Linux发行版和MacOS上。
+| "tar.gz"存档可用于安装在任何Linux发行版和MacOS上。
 
 在 Linux 或 MacOS 上从存档安装 Elasticsearch ---|--- Windows '.zip' 存档
 
-|
-
-"zip"存档适合在Windows上安装。
+| "zip"存档适合在Windows上安装。
 
 在 Windows 'deb' 上安装 Elasticsearch with '.zip'
 
-|
-
-"deb"软件包适用于Debian，Ubuntu和其他基于Debian的系统。Debian 软件包可以从 Elasticsearch 网站或我们的 Debian 仓库下载。
+| "deb"软件包适用于Debian，Ubuntu和其他基于Debian的系统。Debian 软件包可以从 Elasticsearch 网站或我们的 Debian 仓库下载。
 
 使用 Debian 软件包 'rpm' 安装 Elasticsearch
 
-|
-
-"rpm"软件包适合安装在Red Hat，Centos，SLES，OpenSuSE和其他基于RPM的系统上。RPM 可以从 Elasticsearch 网站或我们的 RPM 存储库下载。
+| "rpm"软件包适合安装在Red Hat，Centos，SLES，OpenSuSE和其他基于RPM的系统上。RPM 可以从 Elasticsearch 网站或我们的 RPM 存储库下载。
 
 使用 RPM 'docker' 安装 Elasticsearch
 
-|
-
-镜像可用于将 Elasticsearch 作为 Docker 容器运行。它们可能是从 Elastic Docker 注册表下载的。
+| 镜像可用于将 Elasticsearch 作为 Docker 容器运行。它们可能是从 Elastic Docker 注册表下载的。
 
 使用 Docker 安装 Elasticsearch ### Java (JVM)Versionedit
 

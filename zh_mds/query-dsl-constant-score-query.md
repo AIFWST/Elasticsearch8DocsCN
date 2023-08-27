@@ -26,9 +26,9 @@ DSL](query-dsl.md) ›[Compound queries](compound-queries.md)
         }
       }
     )
-    puts response
-    
-    
+
+puts response
+
     GET /_search
     {
       "query": {
@@ -43,17 +43,14 @@ DSL](query-dsl.md) ›[Compound queries](compound-queries.md)
 
 ### constant_score"的顶级参数
 
-`filter`
-
-    
-
+`filter`:
 (必需，查询对象)要运行的筛选器查询。任何返回的文档都必须与此查询匹配。
 
 筛选器查询不计算相关性分数。为了提高性能，Elasticsearch 会自动缓存常用的过滤器查询。
 
-`boost`
+`boost`:
+（可选，float）浮点数用作与“筛选器”查询匹配的每个文档的常量 [相关性分数](query-filter-context.md)。
+默认为“1.0”。
 
-     (Optional, float) Floating point number used as the constant [relevance score](query-filter-context.html#relevance-scores "Relevance scores") for every document matching the `filter` query. Defaults to `1.0`. 
-
-[« Boosting query](query-dsl-boosting-query.md) [Disjunction max query
+[« Boosting query](uery-dsl-boosting-query.md) [Disjunction max query
 »](query-dsl-dis-max-query.md)

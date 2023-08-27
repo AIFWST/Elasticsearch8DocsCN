@@ -49,19 +49,6 @@ Kibana 使您能够轻松地向 Elasticsearch 发送请求，并以交互方式�
 
 要将单个文档添加到索引，请提交以索引为目标的 HTTP 发布请求。
 
-    
-    
-    response = client.index(
-      index: 'customer',
-      id: 1,
-      body: {
-        firstname: 'Jennifer',
-        lastname: 'Walters'
-      }
-    )
-    puts response
-    
-    
     POST /customer/_doc/1
     {
       "firstname": "Jennifer",
@@ -72,79 +59,11 @@ Kibana 使您能够轻松地向 Elasticsearch 发送请求，并以交互方式�
 
 新文档可立即从群集中的任何节点访问。您可以使用指定其文档 ID 的 GET 请求来检索它：
 
-    
-    
-    $params = [
-        'index' => 'customer',
-        'id' => '1',
-    ];
-    $response = $client->get($params);
-    
-    
-    resp = client.get(index="customer", id="1")
-    print(resp)
-    
-    
-    response = client.get(
-      index: 'customer',
-      id: 1
-    )
-    puts response
-    
-    
-    res, err := es.Get("customer", "1", es.Get.WithPretty())
-    fmt.Println(res, err)
-    
-    
-    const response = await client.get({
-      index: 'customer',
-      id: '1'
-    })
-    console.log(response)
-    
-    
     GET /customer/_doc/1
 
 要在一次请求中添加多个文档，请使用"_bulk"API。批量数据必须是换行符分隔的 JSON (NDJSON)。每行必须以换行符 ('\n) 结尾，包括最后一行。
 
-    
-    
-    response = client.bulk(
-      index: 'customer',
-      body: [
-        {
-          create: {}
-        },
-        {
-          firstname: 'Monica',
-          lastname: 'Rambeau'
-        },
-        {
-          create: {}
-        },
-        {
-          firstname: 'Carol',
-          lastname: 'Danvers'
-        },
-        {
-          create: {}
-        },
-        {
-          firstname: 'Wanda',
-          lastname: 'Maximoff'
-        },
-        {
-          create: {}
-        },
-        {
-          firstname: 'Jennifer',
-          lastname: 'Takeda'
-        }
-      ]
-    )
-    puts response
-    
-    
+
     PUT customer/_bulk
     { "create": { } }
     { "firstname": "Monica","lastname":"Rambeau"}
@@ -155,25 +74,10 @@ Kibana 使您能够轻松地向 Elasticsearch 发送请求，并以交互方式�
     { "create": { } }
     { "firstname": "Jennifer","lastname":"Takeda"}
 
-###Search
+### Search
 
 索引文档可用于近乎实时的搜索。以下搜索匹配"客户"索引中名字为 _Jennifer_ 的所有客户。
 
-    
-    
-    response = client.search(
-      index: 'customer',
-      body: {
-        query: {
-          match: {
-            firstname: 'Jennifer'
-          }
-        }
-      }
-    )
-    puts response
-    
-    
     GET customer/_search
     {
       "query" : {
@@ -181,13 +85,16 @@ Kibana 使您能够轻松地向 Elasticsearch 发送请求，并以交互方式�
       }
     }
 
-###Explore
+### Explore
 
 您可以使用 Kibana 中的"发现"以交互方式搜索和筛选数据。从那里，您可以开始创建可视化以及构建和共享仪表板。
 
-首先，创建一个连接到一个或多个 Elasticsearch 索引、数据流或索引别名的_data view_。
+首先，创建一个连接到一个或多个 Elasticsearch 索引、数据流或索引别名的数据视图。
 
-1. 转到 Kibana >数据视图>管理>堆栈管理**。  2. 选择**创建数据视图**。  3. 输入数据视图的名称以及与一个或多个索引匹配的模式，例如 _customer_。  4. 选择"将数据视图保存到 Kibana**"。
+1. 转到 Kibana >数据视图>管理>堆栈管理**。 
+2. 选择**创建数据视图**。  
+3. 输入数据视图的名称以及与一个或多个索引匹配的模式，例如 _customer_。  
+4. 选择"将数据视图保存到 Kibana**"。
 
 若要开始探索，请转到"**分析>发现**"。
 

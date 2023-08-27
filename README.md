@@ -10,7 +10,7 @@ Elasticsearch是一个开源的分布式搜索和分析引擎，在各种大规�
 
 我们计划在公众号【AI财智通】中分享ElasticSearch中文文档学习笔记，与大家一起交流和学习。如果你对Elasticsearch感兴趣，欢迎关注我们的公众号，获取更多有关Elasticsearch的信息和资源。
 
-![wechat.png](config%2Fwechat.png)
+![wechat.png](./config%2Fwechat.png)
 
 # 程序运行
 python main.py

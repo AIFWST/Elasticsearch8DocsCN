@@ -93,20 +93,20 @@ if __name__ == "__main__":
         except:
             continue
         name = span.find("a").text
-        md_name = str(url_name).replace(".html", ".md")
-        with open(os.path.join(path, "index.md"), "a+", encoding="utf-8") as fh:
-            line = f"[{name}](./{md_name})"
-            fh.write(line + "\n\n")
+    md_name = str(url_name).replace(".html", ".md")
+    with open(os.path.join(path, "index.md"), "a+", encoding="utf-8") as fh:
+        line = f"[{name}](./{md_name})"
+        fh.write(line + "\n\n")
 
-        print(f"ind:{ind},url_name:{url_name}")
-        try:
-            # 从url中获取教程后转为html
-            md_text = url2md(url_name)
-            print(f"=====md_text:{md_text}")
-            md_text = delete_valid_info(md_text)
-            zh_text = translate2zh_md(md_text)
-        except:
-            print(f"error span:{span}")
+    print(f"ind:{ind},url_name:{url_name}")
+    try:
+        # 从url中获取教程后转为html
+        md_text = url2md(url_name)
+        print(f"=====md_text:{md_text}")
+        md_text = delete_valid_info(md_text)
+        zh_text = translate2zh_md(md_text)
+    except:
+        print(f"error span:{span}")
 
 
         with open(os.path.join(path, md_name), "w", encoding="utf-8") as fh:

@@ -12,10 +12,10 @@ DSL](query-dsl.md)
 
 此组中的查询包括：
 
-"布尔"查询
+"bool"查询
 
      The default query for combining multiple leaf or compound query clauses, as `must`, `should`, `must_not`, or `filter` clauses. The `must` and `should` clauses have their scores combined -- the more matching clauses, the better -- while the `must_not` and `filter` clauses are executed in filter context. 
-[`boosting` query](query-dsl-boosting-query.html "Boosting query")
+[`boosting` query](query-dsl-boosting-query.md "Boosting query")
 
      Return documents which match a `positive` query, but reduce the score of documents which also match a `negative` query. 
 [`constant_score` query](query-dsl-constant-score-query.html "Constant score

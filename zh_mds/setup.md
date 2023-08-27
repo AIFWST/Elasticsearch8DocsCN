@@ -5,7 +5,7 @@
 [« What's new in 8.9](release-highlights.md) [Installing Elasticsearch
 »](install-elasticsearch.md)
 
-# 设置弹性搜索
+# 设置Elasticsearch
 
 本节包含有关如何设置 Elasticsearch 并使其运行的信息，包括：
 
@@ -17,7 +17,7 @@
 
 ## 使用专用主机
 
-在生产环境中，我们建议您在专用主机上或作为主服务运行 Elasticsearch。一些 Elasticsearch 功能，例如自动 JVM 堆大小，假设它是主机或容器上唯一的资源密集型应用程序。例如，您可以运行 Metricbeat 和 Elasticsearch 来获取集群统计信息，但资源密集型 Logstash 部署应该在其自己的主机上进行。
+在生产环境中，我们建议您在专用主机上或作为主服务运行 Elasticsearch。一些 Elasticsearch 功能，例如自动 JVM 堆大小，会假设ElasticSearch是主机或容器上唯一的资源密集型应用程序。例如，您可以运行 Metricbeat 和 Elasticsearch 来获取集群统计信息，但资源密集型 Logstash 部署应该在其自己的主机上进行。
 
 [« What's new in 8.9](release-highlights.md) [Installing Elasticsearch
 »](install-elasticsearch.md)

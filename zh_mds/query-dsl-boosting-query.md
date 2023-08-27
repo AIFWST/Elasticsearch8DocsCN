@@ -14,30 +14,6 @@ dsl-constant-score-query.md)
 
 ### 示例请求
 
-    
-    
-    response = client.search(
-      body: {
-        query: {
-          boosting: {
-            positive: {
-              term: {
-                text: 'apple'
-              }
-            },
-            negative: {
-              term: {
-                text: 'pie tart fruit crumble tree'
-              }
-            },
-            negative_boost: 0.5
-          }
-        }
-      }
-    )
-    puts response
-    
-    
     GET /_search
     {
       "query": {
@@ -63,9 +39,6 @@ dsl-constant-score-query.md)
 
      (Required, query object) Query you wish to run. Any returned documents must match this query. 
 `negative`
-
-    
-
 (必需，查询对象)用于降低匹配文档的相关度分数的查询。
 
 如果返回的文档与"正"查询和此查询匹配，则"提升"查询将按如下方式计算文档的最终相关性分数：

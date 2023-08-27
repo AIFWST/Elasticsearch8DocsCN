@@ -6,7 +6,7 @@ Elasticsearch](setup.md)
 [« Run Elasticsearch locally](run-elasticsearch-locally.md) [Important
 Elasticsearch configuration »](important-settings.md)
 
-## 配置弹性搜索
+## 配置ElasticSearch
 
 Elasticsearch提供了良好的默认值，并且需要很少的配置。大多数设置都可以使用群集更新设置 API 在正在运行的群集上更改。
 
@@ -16,7 +16,9 @@ Elasticsearch提供了良好的默认值，并且需要很少的配置。大多�
 
 Elasticsearch 有三个配置文件：
 
-* 'elasticsearch.yml' 用于配置 Elasticsearch ; 'jvm.options' 用于配置 Elasticsearch JVM 设置 * 'log4j2.properties' 用于配置 Elasticsearch 日志记录
+* 'elasticsearch.yml' 用于配置 Elasticsearch ;
+* 'jvm.options' 用于配置 Elasticsearch JVM 设置 ;
+* 'log4j2.properties' 用于配置 Elasticsearch 日志记录
 
 这些文件位于 config 目录中，其默认位置取决于安装是来自归档发行版('tar.gz 或 'zip')还是软件包发行版(Debian 或 RPM 软件包)。
 
@@ -24,7 +26,8 @@ Elasticsearch 有三个配置文件：
 
     
     
-    ES_PATH_CONF=/path/to/my/config ./bin/elasticsearch
+    ES_PATH_CONF=/path/to/my/config 
+    ./bin/elasticsearch
 
 或者，您可以通过命令行或通过 shell 配置文件"导出""ES_PATH_CONF"环境变量。
 
@@ -33,24 +36,17 @@ Elasticsearch 有三个配置文件：
 ### 配置文件格式
 
 配置格式为 YAML。下面是更改数据和日志目录路径的示例：
-
-    
     
     path:
         data: /var/lib/elasticsearch
         logs: /var/log/elasticsearch
 
 还可以按如下方式拼合设置：
-
-    
     
     path.data: /var/lib/elasticsearch
     path.logs: /var/log/elasticsearch
 
 在 YAML 中，可以将非标量值的格式设置为序列：
-
-    
-    
     discovery.seed_hosts:
        - 192.168.1.10:9300
        - 192.168.1.11
